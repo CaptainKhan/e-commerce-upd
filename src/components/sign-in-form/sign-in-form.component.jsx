@@ -42,15 +42,15 @@ const SignInForm = () => {
 
     try {
       const {user} = await signInAuthUserWithEmailAndPassword(email, password);
-      setCurrentUser(user);
-      
       resetFormFields();
+      setCurrentUser(user);
     } catch (error) {
       switch (error.code) {
         case "auth/wrong-password":
           alert("incorrect password for email");
           break;
         case "auth/user-not-found":
+          alert('no user associated with this email');
           break;
         default:
           console.log(error);
@@ -73,7 +73,6 @@ const SignInForm = () => {
     <div>
       <h2>Already have an account?</h2>
       <form onSubmit={handleSubmit} action="">
-
         <FormInput
           label="Email"
           type="email"
@@ -82,7 +81,6 @@ const SignInForm = () => {
           name="email"
           value={email}
         />
-
         <FormInput
           label="Password"
           type="password"
